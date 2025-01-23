@@ -1,0 +1,3 @@
+search *
+| summarize count() by $table
+| project TableName = $table
