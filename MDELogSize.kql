@@ -1,0 +1,13 @@
+let starttime = ago(30d);
+DeviceInfo
+| union DeviceNetworkInfo
+| union DeviceProcessEvents
+| union DeviceNetworkEvents
+| union DeviceFileEvents
+| union DeviceRegistryEvents
+| union DeviceLogonEvents
+| union DeviceImageLoadEvents
+| union DeviceEvents
+| union DeviceFileCertificateInfo
+| where Timestamp >= starttime 
+| summarize RecordCount = count(), MDETotalSizeMB = round(sum(estimate_data_size(*))/pow(1024,2),2)

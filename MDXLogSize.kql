@@ -1,0 +1,5 @@
+let starttime = ago(30d);
+AlertInfo
+| union AlertEvidence
+| where Timestamp >= starttime 
+| summarize RecordCount = count(), AlertTotalSizeMB = round(sum(estimate_data_size(*))/pow(1024,2),2)

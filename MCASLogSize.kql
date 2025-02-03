@@ -1,0 +1,4 @@
+let starttime = ago(30d);
+CloudAppEvents
+| where Timestamp >= starttime 
+| summarize RecordCount = count(), CAppsTotalSizeMB = round(sum(estimate_data_size(*))/pow(1024,2),2)

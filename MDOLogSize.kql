@@ -1,0 +1,8 @@
+let starttime = ago(30d);
+EmailEvents
+| union EmailUrlInfo
+| union EmailAttachmentInfo
+| union EmailPostDeliveryEvents
+| union UrlClickEvents
+| where Timestamp >= starttime 
+| summarize RecordCount = count(), MDOTotalSizeMB = round(sum(estimate_data_size(*))/pow(1024,2),2)

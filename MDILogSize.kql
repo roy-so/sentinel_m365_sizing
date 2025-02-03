@@ -1,0 +1,6 @@
+let starttime = ago(30d);
+IdentityLogonEvents
+| union IdentityQueryEvents
+| union IdentityDirectoryEvents
+| where Timestamp >= starttime 
+| summarize RecordCount = count(), IDTotalSizeMB = round(sum(estimate_data_size(*))/pow(1024,2),2)
